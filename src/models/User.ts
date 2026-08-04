@@ -74,3 +74,5 @@ const UserSchema = new Schema<User>({
 // If it exists, it uses the existing model to avoid recompilation errors (which can occur during hot-reloading in development).
 // If it does not exist, it creates a new model by calling mongoose.model() with the "User" name and the UserSchema.
 const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>("User", UserSchema);
+
+export default UserModel;
