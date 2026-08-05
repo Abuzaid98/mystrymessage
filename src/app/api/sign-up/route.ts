@@ -3,8 +3,6 @@ import UserModel from "@/models/User";
 import bcrypt from "bcryptjs";
 
 import { sendVerificationEmail } from "@/helpers/sendVerificationEmail";
-import { success } from "zod";
-import { el } from "zod/locales";
 
 export async function POST(request: Request) {
     await dbConnect();
