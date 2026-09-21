@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import ReturnResponse from "@/lib/ReturnResponse";
+import returnResponse from "@/lib/returnResponse";
 import UserModel from "@/models/User";
 import { usernameValidation } from "@/schemas/signUpSchema";
 import z from "zod";
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
             const usernameErrors = result.error.format().username?._errors || [];
             const message = usernameErrors?.length > 0 ? usernameErrors.join(', ') : "Invalid query parameter";
 
-            return ReturnResponse(false, message, 400)
+            return returnResponse(false, message, 400)
         }
 
         const { username } = result.data;
@@ -35,10 +35,10 @@ export async function GET(request: Request) {
         const existingVerifiedUser = await UserModel.findOne({ username, isVerified: true })
 
         if (existingVerifiedUser) {
-            return ReturnResponse(false, "username is already taken, please try different", 500)
+            return returnResponse(false, "username is already taken, please try different", 500)
         }
 
-        return ReturnResponse(true, "Username is unique", 200)
+        return returnResponse(true, "Username is unique", 200)
 
     } catch (error) {
         // console.log("Something error with checking username", error);
